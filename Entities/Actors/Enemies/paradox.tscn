@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bty76nhenhpph"]
+
+[ext_resource type="Script" path="res://Entities/Actors/Enemies/paradox.gd" id="1_41l55"]
+[ext_resource type="Texture2D" uid="uid://bew7f8wi523mx" path="res://Assets/Sprites/paradox.png" id="2_ah8y0"]
+[ext_resource type="Texture2D" uid="uid://6to3je2lhu4n" path="res://SanCheeseSources/SanOHNO.png" id="3_4urbd"]
+[ext_resource type="Texture2D" uid="uid://b2iiidx5x68ha" path="res://SanCheeseSources/748650409559588985.png" id="4_kotgp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_homvg"]
+size = Vector2(96, 104)
+
+[node name="Enemy" type="Area2D" node_paths=PackedStringArray("bar")]
+rotation = 3.14159
+collision_layer = 2
+script = ExtResource("1_41l55")
+bar = NodePath("TextureProgressBar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_homvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.285714, 0.292064)
+texture = ExtResource("2_ah8y0")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 47.9996
+offset_top = 80.0002
+offset_right = 144.0
+offset_bottom = 104.0
+rotation = 3.14159
+max_value = 10.0
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_4urbd")
+texture_progress = ExtResource("4_kotgp")

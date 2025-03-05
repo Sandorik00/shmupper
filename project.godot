@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ScreenBorders="*res://screen_borders.gd"
-BulletsContext="*res://bullets_context.gd"
-EnemySpawners="*res://enemy_spawners.gd"
+ScreenBorders="*res://Globals/screen_borders.gd"
+EnemySpawners="*res://Globals/enemy_spawners.gd"
+BulletsContext="*res://Globals/bullets_context.gd"
 
 [display]
 

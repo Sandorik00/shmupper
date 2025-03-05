@@ -1,0 +1,129 @@
+[gd_scene load_steps=15 format=3 uid="uid://csivrj8xrpkig"]
+
+[ext_resource type="Script" path="res://StageNode.gd" id="1_ehpqs"]
+[ext_resource type="Texture2D" uid="uid://dcg5nrtiwqr87" path="res://anime.jpg" id="2_0wbjj"]
+[ext_resource type="Script" path="res://ParallaxBackground.gd" id="2_cbfwd"]
+[ext_resource type="Script" path="res://Player.gd" id="2_x4klf"]
+[ext_resource type="PackedScene" uid="uid://cwf05jodgpptj" path="res://p_bullet.tscn" id="3_fxcri"]
+[ext_resource type="Texture2D" uid="uid://cwisc5oswnwup" path="res://SanCheeseSources/SanCheese.png" id="5_em0h0"]
+[ext_resource type="Texture2D" uid="uid://cbkt1lnyyqyts" path="res://SanCheeseSources/749020982920085596.png" id="5_icgsm"]
+[ext_resource type="Script" path="res://resizable_panel.gd" id="7_d3b2x"]
+[ext_resource type="Script" path="res://bigger.gd" id="9_spjco"]
+[ext_resource type="Script" path="res://smaller.gd" id="10_gggqg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dq30"]
+size = Vector2(96, 96)
+
+[sub_resource type="Curve2D" id="Curve2D_uawjw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 832, 0, 0, 0, 0, 0, 832, 96, 0, 0, 0, 0, 832, 192)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_chdxj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -600, 50, 1200, -200, -1200, 200, -500, 350)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ke6mh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 600, 50, -1200, -200, 0, 0, 500, 350)
+}
+point_count = 2
+
+[node name="MainNode" type="Node2D" node_paths=PackedStringArray("pathsCollection")]
+script = ExtResource("1_ehpqs")
+pathsCollection = NodePath("PathsCollection")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+script = ExtResource("2_cbfwd")
+speed = 50
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 360)
+
+[node name="BG" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("2_0wbjj")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3600, 3600)
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2(372.47, 680)
+script = ExtResource("2_x4klf")
+pbullet_ps = ExtResource("3_fxcri")
+speed = 500
+san_woke = ExtResource("5_icgsm")
+sancheese = ExtResource("5_em0h0")
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_em0h0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_8dq30")
+
+[node name="Shoot_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_uawjw")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(0, 192)
+rotation = -1.5708
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Panel2" type="Panel" parent="HUD"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Panel2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -450.0
+offset_bottom = 800.0
+grow_horizontal = 0
+color = Color(0.00392157, 0.360784, 0.54902, 1)
+script = ExtResource("7_d3b2x")
+
+[node name="Button" type="Button" parent="HUD"]
+offset_left = -328.0
+offset_top = 640.0
+offset_right = -176.0
+offset_bottom = 704.0
+text = "БОЛЬШЕ"
+script = ExtResource("9_spjco")
+
+[node name="Button2" type="Button" parent="HUD"]
+offset_left = -328.0
+offset_top = 536.0
+offset_right = -176.0
+offset_bottom = 600.0
+text = "меньше"
+script = ExtResource("10_gggqg")
+
+[node name="PathsCollection" type="Node2D" parent="."]
+position = Vector2(415, 0)
+
+[node name="LeftSlideAndLeave" type="Path2D" parent="PathsCollection"]
+curve = SubResource("Curve2D_chdxj")
+
+[node name="RightSlideAndLeave" type="Path2D" parent="PathsCollection"]
+curve = SubResource("Curve2D_ke6mh")
+
+[connection signal="button_up" from="HUD/Button" to="HUD/Button" method="_on_button_up"]
+[connection signal="button_up" from="HUD/Button2" to="HUD/Button2" method="_on_button_up"]

@@ -1,15 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://csivrj8xrpkig"]
+[gd_scene load_steps=17 format=3 uid="uid://dy3u08iwi2g08"]
 
-[ext_resource type="Script" path="res://StageNode.gd" id="1_ehpqs"]
-[ext_resource type="Texture2D" uid="uid://dcg5nrtiwqr87" path="res://anime.jpg" id="2_0wbjj"]
-[ext_resource type="Script" path="res://ParallaxBackground.gd" id="2_cbfwd"]
-[ext_resource type="Script" path="res://Player.gd" id="2_x4klf"]
-[ext_resource type="PackedScene" uid="uid://cwf05jodgpptj" path="res://p_bullet.tscn" id="3_fxcri"]
+[ext_resource type="Script" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
+[ext_resource type="Script" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
+[ext_resource type="Texture2D" uid="uid://dcg5nrtiwqr87" path="res://Assets/Sprites/anime.jpg" id="3_p2avx"]
+[ext_resource type="Script" path="res://Entities/Actors/Player/Player.gd" id="4_k84cc"]
 [ext_resource type="Texture2D" uid="uid://cwisc5oswnwup" path="res://SanCheeseSources/SanCheese.png" id="5_em0h0"]
 [ext_resource type="Texture2D" uid="uid://cbkt1lnyyqyts" path="res://SanCheeseSources/749020982920085596.png" id="5_icgsm"]
-[ext_resource type="Script" path="res://resizable_panel.gd" id="7_d3b2x"]
-[ext_resource type="Script" path="res://bigger.gd" id="9_spjco"]
-[ext_resource type="Script" path="res://smaller.gd" id="10_gggqg"]
+[ext_resource type="PackedScene" uid="uid://cqhaj8oxsvdp0" path="res://Entities/Bullets/player_bullet.tscn" id="5_rt5nl"]
+[ext_resource type="Script" path="res://GlobalStage/resizable_panel.gd" id="6_bqi7p"]
+[ext_resource type="Script" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
+[ext_resource type="Script" path="res://GlobalStage/HUD.gd" id="8_hhu7f"]
+[ext_resource type="Script" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
+
+[sub_resource type="Curve" id="Curve_vuwru"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dq30"]
 size = Vector2(96, 96)
@@ -33,12 +38,13 @@ _data = {
 point_count = 2
 
 [node name="MainNode" type="Node2D" node_paths=PackedStringArray("pathsCollection")]
-script = ExtResource("1_ehpqs")
+script = ExtResource("1_220qp")
 pathsCollection = NodePath("PathsCollection")
+TestPathCurve = SubResource("Curve_vuwru")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
-script = ExtResource("2_cbfwd")
+script = ExtResource("2_boyjc")
 speed = 50
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -46,18 +52,20 @@ motion_mirroring = Vector2(0, 360)
 
 [node name="BG" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_repeat = 2
-texture = ExtResource("2_0wbjj")
+texture = ExtResource("3_p2avx")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 3600, 3600)
 
-[node name="Player" type="Area2D" parent="."]
+[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("HUD")]
 position = Vector2(372.47, 680)
-script = ExtResource("2_x4klf")
-pbullet_ps = ExtResource("3_fxcri")
+collision_layer = 4
+script = ExtResource("4_k84cc")
+pbullet_ps = ExtResource("5_rt5nl")
 speed = 500
 san_woke = ExtResource("5_icgsm")
 sancheese = ExtResource("5_em0h0")
+HUD = NodePath("../HUD")
 
 [node name="Sprite" type="Sprite2D" parent="Player"]
 scale = Vector2(0.75, 0.75)
@@ -79,8 +87,9 @@ position = Vector2(0, 192)
 rotation = -1.5708
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("8_hhu7f")
 
-[node name="Panel2" type="Panel" parent="HUD"]
+[node name="PanelAnchor" type="Panel" parent="HUD"]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -89,7 +98,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 
-[node name="ColorRect" type="ColorRect" parent="HUD/Panel2"]
+[node name="StatusPanel" type="ColorRect" parent="HUD/PanelAnchor"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -98,23 +107,34 @@ offset_left = -450.0
 offset_bottom = 800.0
 grow_horizontal = 0
 color = Color(0.00392157, 0.360784, 0.54902, 1)
-script = ExtResource("7_d3b2x")
+script = ExtResource("6_bqi7p")
+
+[node name="PlayerHealth" type="ProgressBar" parent="HUD/PanelAnchor/StatusPanel"]
+modulate = Color(0.788235, 0, 0, 1)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 230.0
+offset_bottom = 60.0
+max_value = 3.0
+step = 1.0
+show_percentage = false
 
 [node name="Button" type="Button" parent="HUD"]
-offset_left = -408.0
-offset_top = 608.0
-offset_right = -256.0
-offset_bottom = 672.0
+offset_left = -328.0
+offset_top = 640.0
+offset_right = -176.0
+offset_bottom = 704.0
 text = "БОЛЬШЕ"
-script = ExtResource("9_spjco")
+script = ExtResource("7_8jo16")
 
 [node name="Button2" type="Button" parent="HUD"]
-offset_left = -400.0
-offset_top = 504.0
-offset_right = -248.0
-offset_bottom = 568.0
+offset_left = -328.0
+offset_top = 536.0
+offset_right = -176.0
+offset_bottom = 600.0
 text = "меньше"
-script = ExtResource("10_gggqg")
+script = ExtResource("8_kbml8")
 
 [node name="PathsCollection" type="Node2D" parent="."]
 position = Vector2(415, 0)
@@ -124,6 +144,41 @@ curve = SubResource("Curve2D_chdxj")
 
 [node name="RightSlideAndLeave" type="Path2D" parent="PathsCollection"]
 curve = SubResource("Curve2D_ke6mh")
+
+[node name="DeathScreen" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+follow_viewport_enabled = true
+
+[node name="Panel" type="Panel" parent="DeathScreen"]
+offset_right = 1280.0
+offset_bottom = 808.0
+
+[node name="ColorRect" type="ColorRect" parent="DeathScreen/Panel"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DeathScreen/Panel/ColorRect"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -84.0
+offset_right = 640.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.539886, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]Сосал
+"
 
 [connection signal="button_up" from="HUD/Button" to="HUD/Button" method="_on_button_up"]
 [connection signal="button_up" from="HUD/Button2" to="HUD/Button2" method="_on_button_up"]
