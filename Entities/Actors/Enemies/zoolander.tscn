@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc5b3d4v6bsog"]
+
+[ext_resource type="PackedScene" uid="uid://bty76nhenhpph" path="res://Entities/Actors/Enemies/paradox.tscn" id="1_escb2"]
+[ext_resource type="Script" uid="uid://baegsu7l2rvvc" path="res://Entities/Actors/Enemies/zoolander.gd" id="2_ktcip"]
+[ext_resource type="Texture2D" uid="uid://bchjjpecedib8" path="res://Assets/Sprites/ono.png" id="2_sdol3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig1d1"]
+size = Vector2(128, 112)
+
+[node name="Zoolander" instance=ExtResource("1_escb2")]
+script = ExtResource("2_ktcip")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_ig1d1")
+
+[node name="TextureProgressBar" parent="." index="1"]
+offset_left = 66.0
+offset_top = 88.0
+offset_right = 198.0
+offset_bottom = 112.0
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_sdol3")

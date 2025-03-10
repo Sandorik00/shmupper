@@ -19,8 +19,8 @@ var events: Array[StageEvent] = [
 	StageEvent.new("paradox", "a", 0.2, false),
 	StageEvent.new("paradox", "a", 0.2, false),
 	StageEvent.new("paradox", "b", 0, true),
-	StageEvent.new("paradox", "a", 0, true),
-	StageEvent.new("paradox", "b", 1, true),
+	StageEvent.new("zoolander", "a", 0, true),
+	StageEvent.new("zoolander", "b", 1, true),
 	StageEvent.new("paradox", "a", 1, true),
 	StageEvent.new("paradox", "b", 1, true),
 	StageEvent.new("paradox", "a", 1, true),
@@ -49,6 +49,17 @@ func paradox(event: StageEvent):
 	var follow = create_enemy_and_follow(event.enemy_type, path)
 	var tween = get_tree().create_tween()
 	tween.tween_property(follow, "progress_ratio", 1, 3)
+	#tween.parallel().tween_interval(event.pause)
+	#tween.tween_interval(event.pause)
+	tween.tween_callback(follow.queue_free)
+	if (not event.wait): return 1
+	return tween.finished
+
+func zoolander(event: StageEvent):
+	var path = "LeftSlideAndLeave" if (event.variation == "a") else "RightSlideAndLeave"
+	var follow = create_enemy_and_follow(event.enemy_type, path)
+	var tween = get_tree().create_tween()
+	tween.tween_property(follow, "progress_ratio", 1, 5)
 	#tween.parallel().tween_interval(event.pause)
 	#tween.tween_interval(event.pause)
 	tween.tween_callback(follow.queue_free)

@@ -15,7 +15,7 @@ func _ready() -> void:
 	get_tree().root.connect("size_changed", _on_viewport_size_changed)
 	
 	mainNode = $/root/MainNode
-	shoot_timer = mainNode.get_node("Shoot_timer") as Timer
+	shoot_timer = mainNode.get_node("ShootTimer") as Timer
 	#Engine.time_scale = 0.5
 
 func _on_viewport_size_changed() -> void:

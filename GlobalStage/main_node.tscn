@@ -1,15 +1,20 @@
 [gd_scene load_steps=15 format=3 uid="uid://csivrj8xrpkig"]
 
-[ext_resource type="Script" path="res://StageNode.gd" id="1_ehpqs"]
-[ext_resource type="Texture2D" uid="uid://dcg5nrtiwqr87" path="res://anime.jpg" id="2_0wbjj"]
-[ext_resource type="Script" path="res://ParallaxBackground.gd" id="2_cbfwd"]
-[ext_resource type="Script" path="res://Player.gd" id="2_x4klf"]
-[ext_resource type="PackedScene" uid="uid://cwf05jodgpptj" path="res://p_bullet.tscn" id="3_fxcri"]
+[ext_resource type="Texture2D" uid="uid://dcg5nrtiwqr87" path="res://Assets/Sprites/anime.jpg" id="2_0wbjj"]
 [ext_resource type="Texture2D" uid="uid://cwisc5oswnwup" path="res://SanCheeseSources/SanCheese.png" id="5_em0h0"]
 [ext_resource type="Texture2D" uid="uid://cbkt1lnyyqyts" path="res://SanCheeseSources/749020982920085596.png" id="5_icgsm"]
-[ext_resource type="Script" path="res://resizable_panel.gd" id="7_d3b2x"]
-[ext_resource type="Script" path="res://bigger.gd" id="9_spjco"]
-[ext_resource type="Script" path="res://smaller.gd" id="10_gggqg"]
+
+[sub_resource type="Resource" id="Resource_4megk"]
+metadata/__load_path__ = "res://StageNode.gd"
+
+[sub_resource type="Resource" id="Resource_xh6as"]
+metadata/__load_path__ = "res://ParallaxBackground.gd"
+
+[sub_resource type="Resource" id="Resource_g8g0l"]
+metadata/__load_path__ = "res://Player.gd"
+
+[sub_resource type="Resource" id="Resource_ytwae"]
+metadata/__load_path__ = "res://p_bullet.tscn"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dq30"]
 size = Vector2(96, 96)
@@ -19,6 +24,15 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 832, 0, 0, 0, 0, 0, 832, 96, 0, 0, 0, 0, 832, 192)
 }
 point_count = 5
+
+[sub_resource type="Resource" id="Resource_sd83f"]
+metadata/__load_path__ = "res://resizable_panel.gd"
+
+[sub_resource type="Resource" id="Resource_3pfru"]
+metadata/__load_path__ = "res://bigger.gd"
+
+[sub_resource type="Resource" id="Resource_hos4n"]
+metadata/__load_path__ = "res://smaller.gd"
 
 [sub_resource type="Curve2D" id="Curve2D_chdxj"]
 _data = {
@@ -33,12 +47,12 @@ _data = {
 point_count = 2
 
 [node name="MainNode" type="Node2D" node_paths=PackedStringArray("pathsCollection")]
-script = ExtResource("1_ehpqs")
+script = SubResource("Resource_4megk")
 pathsCollection = NodePath("PathsCollection")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
-script = ExtResource("2_cbfwd")
+script = SubResource("Resource_xh6as")
 speed = 50
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -53,8 +67,8 @@ region_rect = Rect2(0, 0, 3600, 3600)
 
 [node name="Player" type="Area2D" parent="."]
 position = Vector2(372.47, 680)
-script = ExtResource("2_x4klf")
-pbullet_ps = ExtResource("3_fxcri")
+script = SubResource("Resource_g8g0l")
+pbullet_ps = SubResource("Resource_ytwae")
 speed = 500
 san_woke = ExtResource("5_icgsm")
 sancheese = ExtResource("5_em0h0")
@@ -98,7 +112,7 @@ offset_left = -450.0
 offset_bottom = 800.0
 grow_horizontal = 0
 color = Color(0.00392157, 0.360784, 0.54902, 1)
-script = ExtResource("7_d3b2x")
+script = SubResource("Resource_sd83f")
 
 [node name="Button" type="Button" parent="HUD"]
 offset_left = -328.0
@@ -106,7 +120,7 @@ offset_top = 640.0
 offset_right = -176.0
 offset_bottom = 704.0
 text = "БОЛЬШЕ"
-script = ExtResource("9_spjco")
+script = SubResource("Resource_3pfru")
 
 [node name="Button2" type="Button" parent="HUD"]
 offset_left = -328.0
@@ -114,7 +128,7 @@ offset_top = 536.0
 offset_right = -176.0
 offset_bottom = 600.0
 text = "меньше"
-script = ExtResource("10_gggqg")
+script = SubResource("Resource_hos4n")
 
 [node name="PathsCollection" type="Node2D" parent="."]
 position = Vector2(415, 0)

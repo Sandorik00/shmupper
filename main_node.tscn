@@ -1,20 +1,21 @@
 [gd_scene load_steps=17 format=3 uid="uid://dy3u08iwi2g08"]
 
-[ext_resource type="Script" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
-[ext_resource type="Script" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
+[ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
+[ext_resource type="Script" uid="uid://l44nlwdxejc7" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
 [ext_resource type="Texture2D" uid="uid://dcg5nrtiwqr87" path="res://Assets/Sprites/anime.jpg" id="3_p2avx"]
-[ext_resource type="Script" path="res://Entities/Actors/Player/Player.gd" id="4_k84cc"]
+[ext_resource type="Script" uid="uid://bawmqqk4au0sj" path="res://Entities/Actors/Player/Player.gd" id="4_k84cc"]
 [ext_resource type="Texture2D" uid="uid://cwisc5oswnwup" path="res://SanCheeseSources/SanCheese.png" id="5_em0h0"]
 [ext_resource type="Texture2D" uid="uid://cbkt1lnyyqyts" path="res://SanCheeseSources/749020982920085596.png" id="5_icgsm"]
 [ext_resource type="PackedScene" uid="uid://cqhaj8oxsvdp0" path="res://Entities/Bullets/player_bullet.tscn" id="5_rt5nl"]
-[ext_resource type="Script" path="res://GlobalStage/resizable_panel.gd" id="6_bqi7p"]
-[ext_resource type="Script" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
-[ext_resource type="Script" path="res://GlobalStage/HUD.gd" id="8_hhu7f"]
-[ext_resource type="Script" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
+[ext_resource type="Script" uid="uid://dm708lk45061k" path="res://GlobalStage/resizable_panel.gd" id="6_bqi7p"]
+[ext_resource type="Script" uid="uid://effwoefajqu1" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
+[ext_resource type="Script" uid="uid://ufl23spn1oif" path="res://GlobalStage/HUD.gd" id="8_hhu7f"]
+[ext_resource type="Script" uid="uid://b57a55g3ocvpo" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
 
 [sub_resource type="Curve" id="Curve_vuwru"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_limits = [-10.0, 10.0, -5.0, 5.0]
+_data = [Vector2(-5, -10), 0.0, 0.0, 0, 0, Vector2(-2.5, -10), 0.0, 0.0, 0, 0, Vector2(-0.957447, -10), 0.0, 0.0, 0, 0, Vector2(0.0531917, 10), 0.0, 0.0, 0, 0, Vector2(1.01064, -10), 0.0, 0.0, 0, 0, Vector2(2.39362, -10), 0.0, 0.0, 0, 0, Vector2(5, -10), 0.0, 0.0, 0, 0]
+point_count = 7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dq30"]
 size = Vector2(96, 96)
@@ -74,7 +75,7 @@ texture = ExtResource("5_em0h0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_8dq30")
 
-[node name="Shoot_timer" type="Timer" parent="."]
+[node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 autostart = true
@@ -121,18 +122,18 @@ step = 1.0
 show_percentage = false
 
 [node name="Button" type="Button" parent="HUD"]
-offset_left = -328.0
-offset_top = 640.0
-offset_right = -176.0
-offset_bottom = 704.0
+offset_left = -240.0
+offset_top = 616.0
+offset_right = -88.0
+offset_bottom = 680.0
 text = "БОЛЬШЕ"
 script = ExtResource("7_8jo16")
 
 [node name="Button2" type="Button" parent="HUD"]
-offset_left = -328.0
-offset_top = 536.0
-offset_right = -176.0
-offset_bottom = 600.0
+offset_left = -240.0
+offset_top = 496.0
+offset_right = -88.0
+offset_bottom = 560.0
 text = "меньше"
 script = ExtResource("8_kbml8")
 
@@ -151,8 +152,11 @@ visible = false
 follow_viewport_enabled = true
 
 [node name="Panel" type="Panel" parent="DeathScreen"]
-offset_right = 1280.0
-offset_bottom = 808.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="DeathScreen/Panel"]
 layout_mode = 0
@@ -168,17 +172,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -84.0
-offset_right = 640.0
-offset_bottom = 100.0
+offset_left = -211.0
+offset_top = -92.0
+offset_right = 211.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0.539886, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
-text = "[center]Сосал
+text = "[center]Сосал?
 "
+
+[node name="PatternTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+ignore_time_scale = true
 
 [connection signal="button_up" from="HUD/Button" to="HUD/Button" method="_on_button_up"]
 [connection signal="button_up" from="HUD/Button2" to="HUD/Button2" method="_on_button_up"]
