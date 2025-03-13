@@ -3,33 +3,35 @@ extends Node2D
 @export var pathsCollection: Node2D
 @export var TestPathCurve: Curve
 
+enum ENEMY_TYPES {PARADOX, ZOOLANDER, ZLOY_PARADOX}
+
 class StageEvent:
-	var enemy_type: String
+	var enemy_type: ENEMY_TYPES
 	var variation: String
 	var pause: float
 	var wait: bool
 	
-	func _init(_enemy_type: String, _variation: String, _pause: float, _wait: bool):
+	func _init(_enemy_type: ENEMY_TYPES, _variation: String, _pause: float, _wait: bool):
 		enemy_type = _enemy_type
 		variation = _variation
 		pause = _pause
 		wait = _wait
 
 var events: Array[StageEvent] = [
-	StageEvent.new("paradox", "a", 0.2, false),
-	StageEvent.new("paradox", "a", 0.2, false),
-	StageEvent.new("paradox", "b", 0, true),
-	StageEvent.new("zoolander", "a", 0, true),
-	StageEvent.new("zoolander", "b", 1, true),
-	StageEvent.new("paradox", "a", 1, true),
-	StageEvent.new("paradox", "b", 1, true),
-	StageEvent.new("paradox", "a", 1, true),
-	StageEvent.new("paradox", "b", 0, true),
-	StageEvent.new("paradox", "a", 0, true),
-	StageEvent.new("paradox", "b", 0, true),
-	StageEvent.new("paradox", "a", 0, true),
-	StageEvent.new("paradox", "b", 2, true),
-	StageEvent.new("paradox", "a", 2, true),
+	StageEvent.new(ENEMY_TYPES.ZLOY_PARADOX, "a", 20, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "a", 0.2, false),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "b", 0, true),
+	StageEvent.new(ENEMY_TYPES.ZOOLANDER, "a", 0, true),
+	StageEvent.new(ENEMY_TYPES.ZOOLANDER, "b", 1, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "a", 1, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "b", 1, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "a", 1, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "b", 0, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "a", 0, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "b", 0, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "a", 0, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "b", 2, true),
+	StageEvent.new(ENEMY_TYPES.PARADOX, "a", 2, true),
 ]
 var stage_timer := Timer.new()
 var current_event: StageEvent
@@ -40,7 +42,7 @@ func _ready() -> void:
 
 func _loop():
 	for event in events:
-		var callable = Callable.create(self, event.enemy_type)
+		var callable = Callable.create(self, ENEMY_TYPES.keys()[event.enemy_type].to_lower())
 		await callable.call(event)
 		await create_tween().tween_interval(event.pause).finished
 	
@@ -66,11 +68,17 @@ func zoolander(event: StageEvent):
 	if (not event.wait): return 1
 	return tween.finished
 
-func _process(_delta: float) -> void:
-	pass
+func zloy_paradox(event: StageEvent):
+	var path = "StraightAndWhite"
+	var follow = create_enemy_and_follow(event.enemy_type, path)
+	var tween = get_tree().create_tween()
+	tween.tween_property(follow, "progress_ratio", 1, 3)
+	#tween.tween_callback(follow.queue_free)
+	if (not event.wait): return 1
+	return tween.finished
 
-func create_enemy_and_follow(enemy_type: String, path: String) -> PathFollow2D:
-	var enemy = ResourceLoader.load("res://Entities/Actors/Enemies/%s.tscn" % enemy_type, "PackedScene").instantiate()
+func create_enemy_and_follow(enemy_type: ENEMY_TYPES, path: String) -> PathFollow2D:
+	var enemy = ResourceLoader.load("res://Entities/Actors/Enemies/%s.tscn" % ENEMY_TYPES.keys()[enemy_type].to_lower(), "PackedScene").instantiate()
 	var pathNode = pathsCollection.get_node("%s" % path)
 	var pathFollow = PathFollow2D.new()
 	pathFollow.loop = false

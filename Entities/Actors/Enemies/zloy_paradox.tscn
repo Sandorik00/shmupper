@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp1kwyal4r7mu"]
+
+[ext_resource type="Texture2D" uid="uid://bo1i7t8nf4ypi" path="res://Assets/Sprites/zloy_paradox.png" id="1_k5vqs"]
+[ext_resource type="Script" uid="uid://r17qrfbhkn08" path="res://Entities/Actors/Enemies/zloy_paradox.gd" id="1_mc1lh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mc1lh"]
+size = Vector2(192, 256)
+
+[node name="zloy_paradox" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_mc1lh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mc1lh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.249661, 0.249661)
+texture = ExtResource("1_k5vqs")

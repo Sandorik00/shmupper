@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dy3u08iwi2g08"]
+[gd_scene load_steps=18 format=3 uid="uid://dy3u08iwi2g08"]
 
 [ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
 [ext_resource type="Script" uid="uid://l44nlwdxejc7" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
@@ -35,6 +35,12 @@ point_count = 2
 [sub_resource type="Curve2D" id="Curve2D_ke6mh"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 600, 50, -1200, -200, 0, 0, 500, 350)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_nmw0x"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200)
 }
 point_count = 2
 
@@ -146,6 +152,9 @@ curve = SubResource("Curve2D_chdxj")
 [node name="RightSlideAndLeave" type="Path2D" parent="PathsCollection"]
 curve = SubResource("Curve2D_ke6mh")
 
+[node name="StraightAndWhite" type="Path2D" parent="PathsCollection"]
+curve = SubResource("Curve2D_nmw0x")
+
 [node name="DeathScreen" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -185,6 +194,7 @@ text = "[center]Сосал?
 "
 
 [node name="PatternTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 3.0
 autostart = true
 ignore_time_scale = true
