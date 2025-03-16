@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dy3u08iwi2g08"]
+[gd_scene load_steps=19 format=3 uid="uid://dy3u08iwi2g08"]
 
 [ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
 [ext_resource type="Script" uid="uid://l44nlwdxejc7" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://effwoefajqu1" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
 [ext_resource type="Script" uid="uid://ufl23spn1oif" path="res://GlobalStage/HUD.gd" id="8_hhu7f"]
 [ext_resource type="Script" uid="uid://b57a55g3ocvpo" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
+[ext_resource type="Script" uid="uid://r3eqieitewty" path="res://GlobalStage/fps_counter.gd" id="10_07t30"]
 
 [sub_resource type="Curve" id="Curve_vuwru"]
 _limits = [-10.0, 10.0, -5.0, 5.0]
@@ -18,7 +19,7 @@ _data = [Vector2(-5, -10), 0.0, 0.0, 0, 0, Vector2(-2.5, -10), 0.0, 0.0, 0, 0, V
 point_count = 7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dq30"]
-size = Vector2(96, 96)
+size = Vector2(104, 96)
 
 [sub_resource type="Curve2D" id="Curve2D_uawjw"]
 _data = {
@@ -79,6 +80,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_em0h0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-0.470001, 0)
 shape = SubResource("RectangleShape2D_8dq30")
 
 [node name="ShootTimer" type="Timer" parent="."]
@@ -111,7 +113,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -450.0
-offset_bottom = 800.0
+offset_bottom = 720.0
 grow_horizontal = 0
 color = Color(0.00392157, 0.360784, 0.54902, 1)
 script = ExtResource("6_bqi7p")
@@ -127,19 +129,29 @@ max_value = 3.0
 step = 1.0
 show_percentage = false
 
+[node name="Label" type="Label" parent="HUD/PanelAnchor/StatusPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("10_07t30")
+
 [node name="Button" type="Button" parent="HUD"]
-offset_left = -240.0
-offset_top = 616.0
-offset_right = -88.0
-offset_bottom = 680.0
+offset_left = -280.0
+offset_top = 632.0
+offset_right = -128.0
+offset_bottom = 696.0
 text = "БОЛЬШЕ"
 script = ExtResource("7_8jo16")
 
 [node name="Button2" type="Button" parent="HUD"]
-offset_left = -240.0
-offset_top = 496.0
-offset_right = -88.0
-offset_bottom = 560.0
+offset_left = -280.0
+offset_top = 520.0
+offset_right = -128.0
+offset_bottom = 584.0
 text = "меньше"
 script = ExtResource("8_kbml8")
 

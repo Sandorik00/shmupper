@@ -62,4 +62,5 @@ func _process(delta):
 		$Sprite.texture = sancheese
 	
 func take_damage(amount: int):
-	HUD.take_damage(amount, self)
+	pass
+	#HUD.take_damage(amount, self)

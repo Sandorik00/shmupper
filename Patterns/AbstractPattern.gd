@@ -2,6 +2,8 @@ class_name AbstractPattern extends Node2D
 
 var timer: Timer
 var finished: bool = false
+var entity: Node2D
+var one_bullet: PackedScene
 
 func _ready():
 	timer = get_node("/root/MainNode/PatternTimer")

@@ -1,7 +1,5 @@
 extends AbstractPattern
 
-var entity: Node2D
-var one_bullet: PackedScene
 var adjusted_rotation: float = 0
 
 func _ready() -> void:

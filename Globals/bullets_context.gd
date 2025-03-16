@@ -1,6 +1,6 @@
 extends Node
 
-enum PATTERN_TYPES {ONE_BULLET, ARC, UTSUHO_FUCK_YOU}
+enum PATTERN_TYPES {ONE_BULLET, ARC, UTSUHO_FUCK_YOU, SPREAD_SHOTS}
 
 class PatternEvent:
 	var pattern_type: PATTERN_TYPES
@@ -16,6 +16,7 @@ class PatternEvent:
 @onready var one_bullet = ResourceLoader.load("res://Entities/Bullets/e_basic_bullet.tscn", "PackedScene")
 @onready var arc = ResourceLoader.load("res://Patterns/arc.tscn", "PackedScene")
 @onready var utsuho_fuck_you = ResourceLoader.load("res://Patterns/utsuho_fuck_you.tscn", "PackedScene")
+@onready var spread_shots = ResourceLoader.load("res://Patterns/spread_shots.tscn", "PackedScene")
 
 func shoot_one_bullet(entity: Node2D):
 	var copy = one_bullet.instantiate()
@@ -37,5 +38,7 @@ func shoot_utsuho_fuck_you(entity: Node2D):
 	var utsuho_fuck_you_scene = utsuho_fuck_you.instantiate()
 	utsuho_fuck_you_scene.entity = entity
 	utsuho_fuck_you_scene.one_bullet = one_bullet
+	for i in range(100):
+		utsuho_fuck_you_scene.pattern_queue.append(PatternEvent.new(BulletsContext.PATTERN_TYPES.SPREAD_SHOTS, 0.02, true))
 	main_node.add_child(utsuho_fuck_you_scene)
 	

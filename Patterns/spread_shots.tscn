@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgb7dtn1gaoci"]
+
+[ext_resource type="Script" uid="uid://bnu6u634dlxxd" path="res://Patterns/spread_shots.gd" id="1_qd8qw"]
+
+[node name="360Shots" type="Node2D"]
+script = ExtResource("1_qd8qw")
+metadata/_custom_type_script = "uid://1kohpev4nm5g"
