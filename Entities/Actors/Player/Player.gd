@@ -9,6 +9,7 @@ extends Area2D
 var screen_size := Vector2.ZERO
 var mainNode
 var shoot_timer: Timer
+var hit_cooldown: Timer
 
 func _ready() -> void:
 	screen_size = Vector2(get_viewport_rect().size.x - $/root/MainNode/HUD/PanelAnchor/StatusPanel.size.x, get_viewport_rect().size.y)
@@ -16,6 +17,11 @@ func _ready() -> void:
 	
 	mainNode = $/root/MainNode
 	shoot_timer = mainNode.get_node("ShootTimer") as Timer
+
+	hit_cooldown = Timer.new()
+	hit_cooldown.wait_time = 2.8
+	hit_cooldown.one_shot = true
+	add_child(hit_cooldown)
 	#Engine.time_scale = 0.5
 
 func _on_viewport_size_changed() -> void:
@@ -62,5 +68,12 @@ func _process(delta):
 		$Sprite.texture = sancheese
 	
 func take_damage(amount: int):
-	pass
-	#HUD.take_damage(amount, self)
+	if hit_cooldown.is_stopped():
+		hit_cooldown.start()
+		HUD.take_damage(amount, self)
+
+		var tween = get_tree().create_tween()
+		tween.tween_property($Sprite, "modulate:a", 0.5, 0.2)
+		tween.tween_property($Sprite, "modulate:a", 1, 0.2)
+		tween.set_loops(7)
+		await tween.finished

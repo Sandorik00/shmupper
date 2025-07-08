@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dy3u08iwi2g08"]
+[gd_scene load_steps=20 format=3 uid="uid://dy3u08iwi2g08"]
 
 [ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
 [ext_resource type="Script" uid="uid://l44nlwdxejc7" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://effwoefajqu1" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
 [ext_resource type="Script" uid="uid://ufl23spn1oif" path="res://GlobalStage/HUD.gd" id="8_hhu7f"]
 [ext_resource type="Script" uid="uid://b57a55g3ocvpo" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
+[ext_resource type="Texture2D" uid="uid://b410q4xxf0b1r" path="res://Assets/Sprites/hitbox.png" id="9_cfitj"]
 [ext_resource type="Script" uid="uid://r3eqieitewty" path="res://GlobalStage/fps_counter.gd" id="10_07t30"]
 
 [sub_resource type="Curve" id="Curve_vuwru"]
@@ -18,8 +19,8 @@ _limits = [-10.0, 10.0, -5.0, 5.0]
 _data = [Vector2(-5, -10), 0.0, 0.0, 0, 0, Vector2(-2.5, -10), 0.0, 0.0, 0, 0, Vector2(-0.957447, -10), 0.0, 0.0, 0, 0, Vector2(0.0531917, 10), 0.0, 0.0, 0, 0, Vector2(1.01064, -10), 0.0, 0.0, 0, 0, Vector2(2.39362, -10), 0.0, 0.0, 0, 0, Vector2(5, -10), 0.0, 0.0, 0, 0]
 point_count = 7
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dq30"]
-size = Vector2(104, 96)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07t30"]
+size = Vector2(24, 24)
 
 [sub_resource type="Curve2D" id="Curve2D_uawjw"]
 _data = {
@@ -80,8 +81,13 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_em0h0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-0.470001, 0)
-shape = SubResource("RectangleShape2D_8dq30")
+position = Vector2(-0.470001, 4)
+shape = SubResource("RectangleShape2D_07t30")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(-0.470003, 4)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("9_cfitj")
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.2
