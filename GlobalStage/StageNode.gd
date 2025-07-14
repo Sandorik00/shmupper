@@ -3,7 +3,9 @@ extends Node2D
 @export var pathsCollection: Node2D
 @export var TestPathCurve: Curve
 
-enum ENEMY_TYPES {PARADOX, ZOOLANDER, ZLOY_PARADOX}
+enum ENEMY_TYPES {PARADOX, ZOOLANDER, ZLOY_PARADOX, PARA_PARA}
+
+enum PERSISTENCE_TYPES {BASIC, STAYS, BOSS}
 
 class StageEvent:
 	var enemy_type: ENEMY_TYPES
@@ -11,7 +13,7 @@ class StageEvent:
 	var pause: float
 	var wait: bool
 	var tween_duration: float
-	var is_boss: bool
+	var persistence: PERSISTENCE_TYPES
 	
 	func _init(
 		_enemy_type: ENEMY_TYPES,
@@ -19,17 +21,18 @@ class StageEvent:
 		_pause: float,
 		_wait: bool,
 		_tween_duration: float,
-		_is_boss: bool = false
+		_persistence: PERSISTENCE_TYPES = PERSISTENCE_TYPES.BASIC,
 	):
 		enemy_type = _enemy_type
 		path_name = _path_name
 		pause = _pause
 		wait = _wait
 		tween_duration = _tween_duration
-		is_boss = _is_boss
+		persistence = _persistence
 
 
 var events: Array[StageEvent] = [
+	StageEvent.new(ENEMY_TYPES.PARA_PARA, "StraightAndWhite", 0.2, false, 3, PERSISTENCE_TYPES.STAYS),
 	StageEvent.new(ENEMY_TYPES.PARADOX, "LeftSlideAndLeave", 0.2, false, 3),
 	StageEvent.new(ENEMY_TYPES.PARADOX, "RightSlideAndLeave", 0, true, 3),
 	StageEvent.new(ENEMY_TYPES.ZOOLANDER, "LeftSlideAndLeave", 0, false, 5),
@@ -43,7 +46,7 @@ var events: Array[StageEvent] = [
 	StageEvent.new(ENEMY_TYPES.PARADOX, "LeftSlideAndLeave", 0, true, 3),
 	StageEvent.new(ENEMY_TYPES.PARADOX, "RightSlideAndLeave", 2, true, 3),
 	StageEvent.new(ENEMY_TYPES.PARADOX, "LeftSlideAndLeave", 2, true, 3),
-	StageEvent.new(ENEMY_TYPES.ZLOY_PARADOX, "StraightAndWhite", 1, true, 3, true),
+	StageEvent.new(ENEMY_TYPES.ZLOY_PARADOX, "StraightAndWhite", 1, true, 3, PERSISTENCE_TYPES.BOSS),
 ]
 var stage_timer := Timer.new()
 var current_event: StageEvent
@@ -56,7 +59,7 @@ func _loop():
 		var event: StageEvent = events.pop_front()
 		var enemy = await enemy_setup(event)
 
-		if (event.is_boss):
+		if (event.persistence == PERSISTENCE_TYPES.BOSS):
 			await enemy.tree_exited
 
 		await create_tween().tween_interval(event.pause).finished
@@ -69,7 +72,7 @@ func enemy_setup(event: StageEvent):
 
 	var tween = get_tree().create_tween()
 	tween.tween_property(follow, "progress_ratio", 1, event.tween_duration)
-	if (not event.is_boss):
+	if (event.persistence == PERSISTENCE_TYPES.BASIC):
 		tween.tween_callback(follow.queue_free)
 	
 	if (not event.wait): return enemy
