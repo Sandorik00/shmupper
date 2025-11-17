@@ -2,15 +2,12 @@ extends CanvasLayer
 
 @onready var HealthBar: ProgressBar = $"./PanelAnchor/StatusPanel/PlayerHealth"
 
-var HP = 3
-
 func _ready():
-	HealthBar.value = 3
+	HealthBar.value = PlayerContext.get_hp()
+	PlayerContext.hp_change.connect(_player_hp_changed)
 
-func take_damage(amount: int, player: Node2D):
-	HP -= amount
-	HealthBar.value = HP
+func _player_hp_changed(hp: int):
+	HealthBar.value = hp
 
-	if HP <= 0:
-		player.queue_free()
+	if hp <= 0:
 		%DeathScreen.visible = true

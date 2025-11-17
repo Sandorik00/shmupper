@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8h3dkfokdonc"]
+
+[ext_resource type="Script" uid="uid://dwyxlj2m2nucf" path="res://Entities/Actors/Enemies/fairy.gd" id="1_pks1d"]
+[ext_resource type="Texture2D" uid="uid://p7kkrlfgpb87" path="res://Assets/Sprites/enemies/fairy.png" id="2_pks1d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_homvg"]
+size = Vector2(64, 64)
+
+[node name="Fairy" type="Area2D"]
+rotation = 3.14159
+collision_layer = 2
+script = ExtResource("1_pks1d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.56946e-06, 9.53678e-07)
+shape = SubResource("RectangleShape2D_homvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+texture = ExtResource("2_pks1d")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dy3u08iwi2g08"]
+[gd_scene load_steps=29 format=3 uid="uid://dy3u08iwi2g08"]
 
 [ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
 [ext_resource type="Script" uid="uid://l44nlwdxejc7" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://cwisc5oswnwup" path="res://SanCheeseSources/SanCheese.png" id="5_em0h0"]
 [ext_resource type="Texture2D" uid="uid://cbkt1lnyyqyts" path="res://SanCheeseSources/749020982920085596.png" id="5_icgsm"]
 [ext_resource type="PackedScene" uid="uid://cqhaj8oxsvdp0" path="res://Entities/Bullets/player_bullet.tscn" id="5_rt5nl"]
-[ext_resource type="Script" uid="uid://dm708lk45061k" path="res://GlobalStage/resizable_panel.gd" id="6_bqi7p"]
 [ext_resource type="Script" uid="uid://effwoefajqu1" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
 [ext_resource type="Script" uid="uid://ufl23spn1oif" path="res://GlobalStage/HUD.gd" id="8_hhu7f"]
 [ext_resource type="Script" uid="uid://b57a55g3ocvpo" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
+[ext_resource type="Texture2D" uid="uid://b4qedcchdiitt" path="res://Assets/Sprites/player/player-marisa.png" id="9_bc5hy"]
 [ext_resource type="Texture2D" uid="uid://b410q4xxf0b1r" path="res://Assets/Sprites/hitbox.png" id="9_cfitj"]
 [ext_resource type="Script" uid="uid://r3eqieitewty" path="res://GlobalStage/fps_counter.gd" id="10_07t30"]
 
@@ -20,29 +20,104 @@ _data = [Vector2(-5, -10), 0.0, 0.0, 0, 0, Vector2(-2.5, -10), 0.0, 0.0, 0, 0, V
 point_count = 7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07t30"]
-size = Vector2(24, 24)
+size = Vector2(12, 12)
 
-[sub_resource type="Curve2D" id="Curve2D_uawjw"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 832, 0, 0, 0, 0, 0, 832, 96, 0, 0, 0, 0, 832, 192)
-}
-point_count = 5
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcexr"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bew2h"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmflo"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1naa"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kow25"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ay1ce"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcnnr"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pa4lm"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i728"]
+atlas = ExtResource("9_bc5hy")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0noyg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcexr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bew2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmflo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1naa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kow25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ay1ce")
+}],
+"loop": true,
+"name": &"left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcnnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pa4lm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i728")
+}],
+"loop": true,
+"name": &"right",
+"speed": 10.0
+}]
 
 [sub_resource type="Curve2D" id="Curve2D_chdxj"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -600, 50, 1200, -200, -1200, 200, -500, 350)
+"points": PackedVector2Array(0, 0, 0, 0, -350, 25, 800, -300, -1200, 200, -350, 350)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ke6mh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 600, 50, -1200, -200, 0, 0, 500, 350)
+"points": PackedVector2Array(0, 0, 0, 0, 350, 25, -800, -300, 0, 0, 350, 350)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_nmw0x"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100)
 }
 point_count = 2
 
@@ -54,7 +129,7 @@ TestPathCurve = SubResource("Curve_vuwru")
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
 script = ExtResource("2_boyjc")
-speed = 50
+speed = 25
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(0, 360)
@@ -67,7 +142,8 @@ region_enabled = true
 region_rect = Rect2(0, 0, 3600, 3600)
 
 [node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("HUD")]
-position = Vector2(372.47, 680)
+position = Vector2(231, 408)
+scale = Vector2(0.75, 0.75)
 collision_layer = 4
 script = ExtResource("4_k84cc")
 pbullet_ps = ExtResource("5_rt5nl")
@@ -76,35 +152,28 @@ san_woke = ExtResource("5_icgsm")
 sancheese = ExtResource("5_em0h0")
 HUD = NodePath("../HUD")
 
-[node name="Sprite" type="Sprite2D" parent="Player"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("5_em0h0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-0.470001, 4)
+[node name="Hitbox" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_07t30")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-0.470003, 4)
-scale = Vector2(0.24, 0.24)
+[node name="VisualHitbox" type="Sprite2D" parent="Player"]
+scale = Vector2(0.12, 0.12)
 texture = ExtResource("9_cfitj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_0noyg")
+animation = &"right"
+autoplay = "default"
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 autostart = true
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_uawjw")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0, 192)
-rotation = -1.5708
-
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("8_hhu7f")
 
 [node name="PanelAnchor" type="Panel" parent="HUD"]
+z_index = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -118,19 +187,19 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -450.0
-offset_bottom = 720.0
+offset_left = -220.0
+offset_bottom = 480.0
 grow_horizontal = 0
 color = Color(0.00392157, 0.360784, 0.54902, 1)
-script = ExtResource("6_bqi7p")
 
 [node name="PlayerHealth" type="ProgressBar" parent="HUD/PanelAnchor/StatusPanel"]
 modulate = Color(0.788235, 0, 0, 1)
 layout_mode = 0
-offset_left = 30.0
-offset_top = 30.0
-offset_right = 230.0
-offset_bottom = 60.0
+offset_left = 32.0
+offset_top = 120.0
+offset_right = 132.0
+offset_bottom = 150.0
+rotation = -1.5708
 max_value = 3.0
 step = 1.0
 show_percentage = false
@@ -146,23 +215,63 @@ grow_vertical = 0
 script = ExtResource("10_07t30")
 
 [node name="Button" type="Button" parent="HUD"]
-offset_left = -256.0
-offset_top = 632.0
-offset_right = -104.0
-offset_bottom = 696.0
+offset_left = -288.0
+offset_top = 240.0
+offset_right = -96.0
+offset_bottom = 328.0
 text = "БОЛЬШЕ"
 script = ExtResource("7_8jo16")
 
 [node name="Button2" type="Button" parent="HUD"]
-offset_left = -256.0
-offset_top = 520.0
-offset_right = -104.0
-offset_bottom = 584.0
+offset_left = -288.0
+offset_top = 360.0
+offset_right = -152.0
+offset_bottom = 416.0
 text = "меньше"
 script = ExtResource("8_kbml8")
 
+[node name="PanelTop" type="Panel" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PanelTop"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+color = Color(0.00392157, 0.360784, 0.54902, 1)
+
+[node name="PanelLeft" type="Panel" parent="HUD"]
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PanelLeft"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 480.0
+color = Color(0.00392157, 0.360784, 0.54902, 1)
+
+[node name="PanelBottom" type="Panel" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PanelBottom"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.00392157, 0.360784, 0.54902, 1)
+
 [node name="PathsCollection" type="Node2D" parent="."]
-position = Vector2(415, 0)
+position = Vector2(272, 0)
 
 [node name="LeftSlideAndLeave" type="Path2D" parent="PathsCollection"]
 curve = SubResource("Curve2D_chdxj")
@@ -186,9 +295,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="DeathScreen/Panel"]
-layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 720.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="DeathScreen/Panel/ColorRect"]

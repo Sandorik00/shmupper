@@ -30,8 +30,8 @@ func _process(delta: float) -> void:
 
 		# Rotate towards the target
 		rotation = lerp_angle(current_angle, desired_rotation, 10 * delta)
-	
-	if not get_viewport_rect().has_point(global_position):
+
+	if not ScreenBorders.game_field.has_point(global_position):
 		queue_free()
 
 ##Supply rotation to bullet

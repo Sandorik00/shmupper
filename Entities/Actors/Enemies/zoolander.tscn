@@ -14,11 +14,5 @@ script = ExtResource("2_ktcip")
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_ig1d1")
 
-[node name="TextureProgressBar" parent="." index="1"]
-offset_left = 66.0
-offset_top = 88.0
-offset_right = 198.0
-offset_bottom = 112.0
-
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_sdol3")
