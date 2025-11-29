@@ -31,9 +31,6 @@ func _process(delta: float) -> void:
 		# Rotate towards the target
 		rotation = lerp_angle(current_angle, desired_rotation, 10 * delta)
 
-	if not ScreenBorders.game_field.has_point(global_position):
-		queue_free()
-
 ##Supply rotation to bullet
 func prepare(_rotation: float, _player: Node2D = null) -> void:
 	initial_rotate = _rotation

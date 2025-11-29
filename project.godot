@@ -21,6 +21,7 @@ ScreenBorders="*res://Globals/screen_borders.gd"
 EnemySpawners="*res://Globals/enemy_spawners.gd"
 BulletsContext="*res://Globals/bullets_context.gd"
 PlayerContext="*res://Globals/player_context.gd"
+BulletPool="*res://Globals/bullet_pool.gd"
 
 [display]
 
@@ -30,6 +31,7 @@ window/size/resizable=false
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
+window/vsync/vsync_mode=0
 
 [input]
 

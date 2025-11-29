@@ -59,8 +59,8 @@ func _process(delta):
 	if Input.is_action_pressed("shoot"):
 		if shoot_timer.is_stopped():
 			for n in 1:
-				var copy = pbullet_ps.instantiate()
-				var copy2 = pbullet_ps.instantiate()
+				var copy = BulletPool.get_bullet(true)
+				var copy2 = BulletPool.get_bullet(true)
 				copy.prepare(self.rotation)
 				copy2.prepare(self.rotation)
 				var bullet_offset_1 = self.global_position

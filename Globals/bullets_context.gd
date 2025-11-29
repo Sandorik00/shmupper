@@ -21,7 +21,7 @@ class PatternEvent:
 @onready var one_bullet_homing = ResourceLoader.load("res://Patterns/one_bullet_homing.tscn", "PackedScene")
 
 func shoot_one_bullet(entity: Node2D):
-	var copy = one_bullet.instantiate()
+	var copy = BulletPool.get_bullet() as Bullet
 	copy.prepare(entity.rotation)
 	var bullet_offset = entity.global_position
 	bullet_offset += Vector2(0, -70).rotated(entity.rotation)
@@ -45,7 +45,7 @@ func shoot_utsuho_fuck_you(entity: Node2D):
 	main_node.add_child(utsuho_fuck_you_scene)
 
 func shoot_one_bullet_homing(entity: Node2D):
-	var copy = one_bullet.instantiate()
+	var copy = BulletPool.get_bullet() as Bullet
 	copy.prepare(entity.rotation, player)
 	copy.change_speed(300)
 	copy.change_homing_strength(0.3)
