@@ -1,8 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://dy3u08iwi2g08"]
+[gd_scene load_steps=31 format=3 uid="uid://dy3u08iwi2g08"]
 
 [ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
-[ext_resource type="Script" uid="uid://l44nlwdxejc7" path="res://GlobalStage/ParallaxBackground.gd" id="2_boyjc"]
-[ext_resource type="Texture2D" uid="uid://dcg5nrtiwqr87" path="res://Assets/Sprites/anime.jpg" id="3_p2avx"]
+[ext_resource type="Shader" uid="uid://dd6qku06jx3n3" path="res://bg.gdshader" id="4_cfitj"]
 [ext_resource type="Script" uid="uid://bawmqqk4au0sj" path="res://Entities/Actors/Player/Player.gd" id="4_k84cc"]
 [ext_resource type="Texture2D" uid="uid://cwisc5oswnwup" path="res://SanCheeseSources/SanCheese.png" id="5_em0h0"]
 [ext_resource type="Texture2D" uid="uid://cbkt1lnyyqyts" path="res://SanCheeseSources/749020982920085596.png" id="5_icgsm"]
@@ -103,6 +102,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_07t30"]
+font_size = 14
+
 [sub_resource type="Curve2D" id="Curve2D_chdxj"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -350, 25, 800, -300, -1200, 200, -350, 350)
@@ -121,25 +123,38 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bc5hy"]
+shader = ExtResource("4_cfitj")
+shader_parameter/density = 150.0
+shader_parameter/layer_parascale = 2
+shader_parameter/speedx = 1.49012e-07
+shader_parameter/speedy = 0.1
+shader_parameter/star_horizontal_wave = 0.3
+shader_parameter/star_size = 3.0
+shader_parameter/twinkle_effect = 0.6
+shader_parameter/twinkle_speed = 0.3
+shader_parameter/fbm_strength = 0.12
+shader_parameter/fbm_mix = 0.07
+shader_parameter/fbm_freq = 4.0
+shader_parameter/fbm_amp = 1.5
+shader_parameter/fbm_speed = 5.0
+shader_parameter/warp_scale = 2.0
+shader_parameter/cloud_freq = 40.0
+shader_parameter/cloud_amp = 0.02
+shader_parameter/cloud_speed = 5.0
+shader_parameter/cloud_color_ci1 = 0.75
+shader_parameter/cloud_color_ci2 = 0.45
+shader_parameter/cloud_color_ci3 = 0.9
+shader_parameter/cloud_color_shiftx = 0.0
+shader_parameter/cloud_color_shifty = 0.0
+shader_parameter/background_color = Color(0.02, 0.04, 0.12, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cfitj"]
+
 [node name="MainNode" type="Node2D" node_paths=PackedStringArray("pathsCollection")]
 script = ExtResource("1_220qp")
 pathsCollection = NodePath("PathsCollection")
 TestPathCurve = SubResource("Curve_vuwru")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
-script = ExtResource("2_boyjc")
-speed = 25
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(0, 360)
-
-[node name="BG" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture_repeat = 2
-texture = ExtResource("3_p2avx")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 3600, 3600)
 
 [node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("HUD")]
 position = Vector2(231, 408)
@@ -190,7 +205,7 @@ anchor_right = 1.0
 offset_left = -220.0
 offset_bottom = 480.0
 grow_horizontal = 0
-color = Color(0.00392157, 0.360784, 0.54902, 1)
+color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="PlayerHealth" type="ProgressBar" parent="HUD/PanelAnchor/StatusPanel"]
 modulate = Color(0.788235, 0, 0, 1)
@@ -205,6 +220,7 @@ step = 1.0
 show_percentage = false
 
 [node name="Label" type="Label" parent="HUD/PanelAnchor/StatusPanel"]
+z_index = 20
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -212,6 +228,8 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
+label_settings = SubResource("LabelSettings_07t30")
+vertical_alignment = 2
 script = ExtResource("10_07t30")
 
 [node name="Button" type="Button" parent="HUD"]
@@ -236,12 +254,13 @@ anchor_right = 1.0
 grow_horizontal = 2
 
 [node name="ColorRect" type="ColorRect" parent="HUD/PanelTop"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
-color = Color(0.00392157, 0.360784, 0.54902, 1)
+color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="PanelLeft" type="Panel" parent="HUD"]
 
@@ -249,7 +268,7 @@ color = Color(0.00392157, 0.360784, 0.54902, 1)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 480.0
-color = Color(0.00392157, 0.360784, 0.54902, 1)
+color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="PanelBottom" type="Panel" parent="HUD"]
 anchors_preset = 12
@@ -260,6 +279,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ColorRect" type="ColorRect" parent="HUD/PanelBottom"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -268,7 +288,7 @@ anchor_bottom = 1.0
 offset_top = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.00392157, 0.360784, 0.54902, 1)
+color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="PathsCollection" type="Node2D" parent="."]
 position = Vector2(272, 0)
@@ -328,6 +348,13 @@ unique_name_in_owner = true
 wait_time = 3.0
 autostart = true
 ignore_time_scale = true
+
+[node name="BG" type="Sprite2D" parent="."]
+z_index = -505
+material = SubResource("ShaderMaterial_bc5hy")
+position = Vector2(320, 239.75)
+scale = Vector2(640, 480.5)
+texture = SubResource("CanvasTexture_cfitj")
 
 [connection signal="button_up" from="HUD/Button" to="HUD/Button" method="_on_button_up"]
 [connection signal="button_up" from="HUD/Button2" to="HUD/Button2" method="_on_button_up"]
