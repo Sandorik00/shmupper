@@ -61,16 +61,14 @@ func _process(delta):
 			for n in 1:
 				var copy = BulletPool.get_bullet(true)
 				var copy2 = BulletPool.get_bullet(true)
-				copy.prepare(self.rotation)
-				copy2.prepare(self.rotation)
 				var bullet_offset_1 = self.global_position
 				var bullet_offset_2 = self.global_position
 				bullet_offset_1 += Vector2(-10, -35)
 				bullet_offset_2 += Vector2(10, -35)
 				copy.position = bullet_offset_1
 				copy2.position = bullet_offset_2
-				mainNode.add_child(copy)
-				mainNode.add_child(copy2)
+				copy.prepare(self.rotation)
+				copy2.prepare(self.rotation)
 				shoot_timer.start()
 	
 func take_damage(amount: int):
