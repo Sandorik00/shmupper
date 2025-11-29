@@ -32,27 +32,26 @@ class StageEvent:
 
 
 var events: Array[StageEvent] = [
+	StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0.2, true, 3),
+	StageEvent.new(ENEMY_TYPES.ZOOLANDER, "LeftSlideAndLeave", 0, true, 5),
 	StageEvent.new(ENEMY_TYPES.ZLOY_PARADOX, "StraightAndWhite", 1, true, 3, PERSISTENCE_TYPES.BOSS),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0.2, true, 3),
-	# StageEvent.new(ENEMY_TYPES.ZOOLANDER, "LeftSlideAndLeave", 0, true, 5),
 	# StageEvent.new(ENEMY_TYPES.ZOOLANDER, "RightSlideAndLeave", 1, true, 5),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 1, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 1, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 1, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 2, true, 3),
-	# StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 2, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 1, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 1, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 1, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 2, true, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 2, true, 3),
 	# StageEvent.new(ENEMY_TYPES.PARA_PARA, "StraightAndWhite", 0.2, false, 3, PERSISTENCE_TYPES.STAYS),
 ]
 var stage_timer := Timer.new()
 var current_event: StageEvent
 
 func _ready() -> void:
-	Engine.time_scale = 1
 	_loop()
 
 func _loop():
@@ -62,7 +61,6 @@ func _loop():
 
 		if (event.persistence == PERSISTENCE_TYPES.BOSS):
 			await enemy.tree_exited
-			print(BulletPool.e_bullet_pool.size())
 
 		await create_tween().tween_interval(event.pause).finished
 

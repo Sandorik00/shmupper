@@ -6,10 +6,10 @@ var additional_speed: int = 600
 var player: Node2D
 var homing_strength: float = 1
 
-# func _ready() -> void:
-# 	initial_pos = position
-# 	rotation = initial_rotate
-# 	#Engine.time_scale = 0.1
+func _ready() -> void:
+	initial_pos = position
+	rotation = initial_rotate
+	#Engine.time_scale = 0.1
 
 func _process(delta: float) -> void:
 	position += Vector2.UP.rotated(rotation) * additional_speed * delta
@@ -33,11 +33,8 @@ func _process(delta: float) -> void:
 
 ##Supply rotation to bullet
 func prepare(_rotation: float, _player: Node2D = null) -> void:
+	initial_rotate = _rotation
 	player = _player
-	initial_pos = position
-	rotation = _rotation
-	self.set_process(true)
-	self.show()
 
 func change_speed(_speed: int) -> void:
 	additional_speed = _speed

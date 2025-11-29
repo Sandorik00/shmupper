@@ -4,7 +4,7 @@ class_name EBasicBullet
 func _on_area_entered(area: Area2D) -> void:
 	if area.collision_layer == 4:
 		area.take_damage(1)
-		BulletPool.free_bullet(self)
+		self.queue_free()
 
 func _process(delta):
 	super (delta)
