@@ -13,7 +13,7 @@ config_version=5
 config/name="Shmup"
 run/main_scene="res://main_node.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-run/max_fps=120
+run/max_fps=240
 config/icon="res://icon.svg"
 
 [autoload]
