@@ -1,9 +1,10 @@
 {
-  "godotTools.editorPath.godot4": "c:\\Users\\san\\Desktop\\Godot_v4.4-stable_win64.exe\\Godot_v4.4-stable_win64.exe",
+  "godotTools.editorPath.godot4": "c:\\Users\\san\\Desktop\\Godot_v4.5.1-stable_win64.exe\\Godot_v4.5.1-stable_win64.exe",
   "editor.defaultFormatter": "geequlim.godot-tools",
   "editor.formatOnSave": true,
   "files.exclude": {
-    "**/*.gd.uid": true,
+    "**/*.uid": true,
     "**/*.tscn": true,
+    "**/*.import": true,
   }
 }

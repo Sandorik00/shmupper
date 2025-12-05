@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p7kkrlfgpb87"
-path="res://.godot/imported/fairy.png-f22de88d8208da954e533f072f6204a1.ctex"
+uid="uid://bed2eppnl18re"
+path="res://.godot/imported/custom.svg-4d6d88ba20f2f9599cb86774a606737e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/enemies/fairy.png"
-dest_files=["res://.godot/imported/fairy.png-f22de88d8208da954e533f072f6204a1.ctex"]
+source_file="res://custom.svg"
+dest_files=["res://.godot/imported/custom.svg-4d6d88ba20f2f9599cb86774a606737e.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

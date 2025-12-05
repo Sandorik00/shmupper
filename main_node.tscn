@@ -1,25 +1,18 @@
-[gd_scene load_steps=31 format=3 uid="uid://dy3u08iwi2g08"]
+[gd_scene load_steps=28 format=3 uid="uid://dy3u08iwi2g08"]
 
 [ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
 [ext_resource type="Shader" uid="uid://dd6qku06jx3n3" path="res://bg.gdshader" id="4_cfitj"]
 [ext_resource type="Script" uid="uid://bawmqqk4au0sj" path="res://Entities/Actors/Player/Player.gd" id="4_k84cc"]
-[ext_resource type="Texture2D" uid="uid://cwisc5oswnwup" path="res://SanCheeseSources/SanCheese.png" id="5_em0h0"]
-[ext_resource type="Texture2D" uid="uid://cbkt1lnyyqyts" path="res://SanCheeseSources/749020982920085596.png" id="5_icgsm"]
-[ext_resource type="PackedScene" uid="uid://cqhaj8oxsvdp0" path="res://Entities/Bullets/player_bullet.tscn" id="5_rt5nl"]
 [ext_resource type="Script" uid="uid://effwoefajqu1" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
+[ext_resource type="Script" uid="uid://cmldc78oktoag" path="res://Entities/Actors/Player/visual_hurtbox.gd" id="8_dabxs"]
 [ext_resource type="Script" uid="uid://ufl23spn1oif" path="res://GlobalStage/HUD.gd" id="8_hhu7f"]
 [ext_resource type="Script" uid="uid://b57a55g3ocvpo" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
 [ext_resource type="Texture2D" uid="uid://b4qedcchdiitt" path="res://Assets/Sprites/player/player-marisa.png" id="9_bc5hy"]
-[ext_resource type="Texture2D" uid="uid://b410q4xxf0b1r" path="res://Assets/Sprites/hitbox.png" id="9_cfitj"]
 [ext_resource type="Script" uid="uid://r3eqieitewty" path="res://GlobalStage/fps_counter.gd" id="10_07t30"]
+[ext_resource type="FontFile" uid="uid://d0eqnur73j3pp" path="res://Fonts/quinquefive/QuinqueFive.ttf" id="12_dabxs"]
 
-[sub_resource type="Curve" id="Curve_vuwru"]
-_limits = [-10.0, 10.0, -5.0, 5.0]
-_data = [Vector2(-5, -10), 0.0, 0.0, 0, 0, Vector2(-2.5, -10), 0.0, 0.0, 0, 0, Vector2(-0.957447, -10), 0.0, 0.0, 0, 0, Vector2(0.0531917, 10), 0.0, 0.0, 0, 0, Vector2(1.01064, -10), 0.0, 0.0, 0, 0, Vector2(2.39362, -10), 0.0, 0.0, 0, 0, Vector2(5, -10), 0.0, 0.0, 0, 0]
-point_count = 7
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_07t30"]
-size = Vector2(12, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_07t30"]
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xcexr"]
 atlas = ExtResource("9_bc5hy")
@@ -103,17 +96,18 @@ animations = [{
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_07t30"]
-font_size = 14
+font = ExtResource("12_dabxs")
+font_size = 10
 
 [sub_resource type="Curve2D" id="Curve2D_chdxj"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -350, 25, 800, -300, -1200, 200, -350, 350)
+"points": PackedVector2Array(0, 0, 0, 0, -250, -50, 800, -50, -1200, 200, -500, 300)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ke6mh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 350, 25, -800, -300, 0, 0, 350, 350)
+"points": PackedVector2Array(0, 0, 0, 0, 250, -50, -800, -50, 0, 0, 500, 300)
 }
 point_count = 2
 
@@ -125,13 +119,13 @@ point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bc5hy"]
 shader = ExtResource("4_cfitj")
-shader_parameter/density = 150.0
+shader_parameter/density = 180.0
 shader_parameter/layer_parascale = 2
 shader_parameter/speedx = 1.49012e-07
 shader_parameter/speedy = 0.1
 shader_parameter/star_horizontal_wave = 0.3
 shader_parameter/star_size = 3.0
-shader_parameter/twinkle_effect = 0.6
+shader_parameter/twinkle_effect = 0.60000000894072
 shader_parameter/twinkle_speed = 0.3
 shader_parameter/fbm_strength = 0.12
 shader_parameter/fbm_mix = 0.07
@@ -154,30 +148,29 @@ shader_parameter/background_color = Color(0.02, 0.04, 0.12, 1)
 [node name="MainNode" type="Node2D" node_paths=PackedStringArray("pathsCollection")]
 script = ExtResource("1_220qp")
 pathsCollection = NodePath("PathsCollection")
-TestPathCurve = SubResource("Curve_vuwru")
 
 [node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("HUD")]
 position = Vector2(231, 408)
 scale = Vector2(0.75, 0.75)
 collision_layer = 4
 script = ExtResource("4_k84cc")
-pbullet_ps = ExtResource("5_rt5nl")
-speed = 500
-san_woke = ExtResource("5_icgsm")
-sancheese = ExtResource("5_em0h0")
+speed = 400
+focus_speed = 100
+hitbox_radius = 8.0
 HUD = NodePath("../HUD")
 
 [node name="Hitbox" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_07t30")
-
-[node name="VisualHitbox" type="Sprite2D" parent="Player"]
-scale = Vector2(0.12, 0.12)
-texture = ExtResource("9_cfitj")
+z_index = 2
+shape = SubResource("CircleShape2D_07t30")
 
 [node name="Animation" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_0noyg")
 animation = &"right"
 autoplay = "default"
+
+[node name="VisualHurtbox" type="Sprite2D" parent="Player"]
+z_index = 1
+script = ExtResource("8_dabxs")
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -225,26 +218,28 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
+offset_top = -21.0
+offset_right = 82.0
 grow_vertical = 0
+text = "FPS:2310"
 label_settings = SubResource("LabelSettings_07t30")
 vertical_alignment = 2
 script = ExtResource("10_07t30")
 
 [node name="Button" type="Button" parent="HUD"]
-offset_left = -288.0
+offset_left = -328.0
 offset_top = 240.0
-offset_right = -96.0
+offset_right = -136.0
 offset_bottom = 328.0
+theme_override_font_sizes/font_size = 24
 text = "БОЛЬШЕ"
 script = ExtResource("7_8jo16")
 
 [node name="Button2" type="Button" parent="HUD"]
-offset_left = -288.0
-offset_top = 360.0
-offset_right = -152.0
-offset_bottom = 416.0
+offset_left = -312.0
+offset_top = 384.0
+offset_right = -176.0
+offset_bottom = 440.0
 text = "меньше"
 script = ExtResource("8_kbml8")
 
@@ -291,7 +286,7 @@ grow_vertical = 0
 color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="PathsCollection" type="Node2D" parent="."]
-position = Vector2(272, 0)
+position = Vector2(225, 0)
 
 [node name="LeftSlideAndLeave" type="Path2D" parent="PathsCollection"]
 curve = SubResource("Curve2D_chdxj")
@@ -337,11 +332,14 @@ offset_right = 211.0
 offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/default_color = Color(0.539886, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 120
+theme_override_colors/default_color = Color(0.70378155, 0.03377556, 0.12630415, 1)
+theme_override_fonts/normal_font = ExtResource("12_dabxs")
+theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
 text = "[center]Сосал?
 "
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PatternTimer" type="Timer" parent="."]
 unique_name_in_owner = true

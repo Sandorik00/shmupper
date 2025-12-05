@@ -1,6 +1,6 @@
 class_name Bullet extends Area2D
 
-var initial_rotate: float
+var initial_rotate: float = 0
 var initial_pos: Vector2
 var additional_speed: int = 600
 var player: Node2D
@@ -41,3 +41,10 @@ func change_speed(_speed: int) -> void:
 
 func change_homing_strength(_strength: float) -> void:
 	homing_strength = _strength
+
+func reset() -> void:
+	initial_rotate = 0
+	player = null
+	additional_speed = 600
+	homing_strength = 1
+	position = Vector2(-10, -10)

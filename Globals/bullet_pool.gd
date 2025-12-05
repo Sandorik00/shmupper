@@ -22,8 +22,8 @@ func get_bullet(is_player: bool = false) -> Bullet:
 	else: return get_or_create_bullet(e_bullet_pool, one_bullet)
 
 func free_bullet(bullet: Bullet, is_player: bool = false):
-	bullet.get_parent().remove_child(bullet)
-	bullet.position = Vector2(-10, -10)
+	bullet.get_parent().call_deferred("remove_child", bullet)
+	bullet.reset()
 
 	if is_player: p_bullet_pool.push_back(bullet)
 	else: e_bullet_pool.push_back(bullet)

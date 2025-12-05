@@ -1,9 +1,11 @@
 extends Area2D
 
-@export var pbullet_ps: PackedScene
+@export_category("configs")
 @export var speed := 100
-@export var san_woke: Texture2D
-@export var sancheese: Texture2D
+@export var focus_speed := 50
+@export_range(1, 20, .5) var hitbox_radius: float
+
+@export_category("HUD")
 @export var HUD: CanvasLayer
 
 var screen_size := {min: Vector2.ZERO, max: Vector2.ZERO}
@@ -16,8 +18,12 @@ var can_take_damage: bool
 @onready var leftPanel = HUD.get_node("PanelLeft/ColorRect")
 @onready var topPanel = HUD.get_node("PanelTop/ColorRect")
 @onready var bottomPanel = HUD.get_node("PanelBottom/ColorRect")
+@onready var visualHurtbox := get_node("VisualHurtbox") as Sprite2D
+@onready var hitbox := $Hitbox as CollisionShape2D
 
 func _ready() -> void:
+	visualHurtbox.hitbox_radius = hitbox_radius
+	hitbox.shape.radius = hitbox_radius
 	can_take_damage = true
 	screen_size.max = Vector2(get_viewport_rect().size.x - statusPanel.size.x, get_viewport_rect().size.y - bottomPanel.size.y)
 	screen_size.min = Vector2(leftPanel.size.x, topPanel.size.y)
@@ -36,6 +42,13 @@ func _on_viewport_size_changed() -> void:
 
 func _process(delta):
 	#MOVE
+	var curr_speed = speed
+	visualHurtbox.hide()
+
+	if Input.is_action_pressed("focus"):
+		curr_speed = focus_speed
+		visualHurtbox.show()
+
 	var movement := Vector2(Input.get_action_strength("camera_right") - Input.get_action_strength("camera_left"),
 		Input.get_action_strength("camera_down") - Input.get_action_strength("camera_up"))
 
@@ -46,7 +59,7 @@ func _process(delta):
 	else:
 		$Animation.animation = "default"
 		
-	movement = speed * movement.normalized()
+	movement = curr_speed * movement.normalized()
 	position += movement * delta
 	position = position.clamp(screen_size.min, screen_size.max)
 	

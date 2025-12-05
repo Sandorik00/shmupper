@@ -9,6 +9,7 @@ func _ready() -> void:
 	for i in range(bullets_qty):
 		var angle = deg_to_rad(-180 + i * (360.0 / bullets_qty))
 		var bullet = BulletPool.get_bullet() as Bullet
+		bullet.change_speed(50)
 		bullet.prepare(entity.rotation + adjusted_rotation + angle)
 
 		var bullet_offset = entity.global_position
