@@ -253,6 +253,8 @@ z_index = 10
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 30.0
+offset_right = -220.0
 offset_bottom = 16.0
 grow_horizontal = 2
 color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
@@ -280,7 +282,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 30.0
 offset_top = -16.0
+offset_right = -220.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
@@ -350,8 +354,8 @@ ignore_time_scale = true
 [node name="BG" type="Sprite2D" parent="."]
 z_index = -505
 material = SubResource("ShaderMaterial_bc5hy")
-position = Vector2(320, 239.75)
-scale = Vector2(640, 480.5)
+position = Vector2(320, 239.99998)
+scale = Vector2(640, 480)
 texture = SubResource("CanvasTexture_cfitj")
 
 [connection signal="button_up" from="HUD/Button" to="HUD/Button" method="_on_button_up"]

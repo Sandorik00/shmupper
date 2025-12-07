@@ -61,7 +61,8 @@ func _process(delta):
 		
 	movement = curr_speed * movement.normalized()
 	position += movement * delta
-	position = position.clamp(screen_size.min, screen_size.max)
+	#TODO: improve
+	position = position.clamp(screen_size.min + Vector2(6, 6), screen_size.max - Vector2(6, 6))
 	
 	#look_at(get_global_mouse_position())
 	#rotation += PI/2
