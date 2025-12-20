@@ -6,8 +6,8 @@ var p_bullet_pool: Array[Bullet] = []
 # var e_index: int = 0
 # var p_index: int = 0
 
-@onready var one_bullet: PackedScene = ResourceLoader.load("res://Entities/Bullets/e_basic_bullet.tscn")
-@onready var p_bullet: PackedScene = ResourceLoader.load("res://Entities/Bullets/player_bullet.tscn")
+@onready var one_bullet: PackedScene = preload("res://Entities/Bullets/e_basic_bullet.tscn")
+@onready var p_bullet: PackedScene = preload("res://Entities/Bullets/player_bullet.tscn")
 
 # func _ready():
 # 	for i in 1000:

@@ -101,13 +101,13 @@ font_size = 10
 
 [sub_resource type="Curve2D" id="Curve2D_chdxj"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -250, -50, 800, -50, -1200, 200, -500, 300)
+"points": PackedVector2Array(0, 0, 0, 0, -250, -50, 800, -50, -1200, 200, -500, 200)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ke6mh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 250, -50, -800, -50, 0, 0, 500, 300)
+"points": PackedVector2Array(0, 0, 0, 0, 250, -50, -800, -50, 0, 0, 500, 200)
 }
 point_count = 2
 
@@ -165,7 +165,6 @@ shape = SubResource("CircleShape2D_07t30")
 
 [node name="Animation" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_0noyg")
-animation = &"right"
 autoplay = "default"
 
 [node name="VisualHurtbox" type="Sprite2D" parent="Player"]

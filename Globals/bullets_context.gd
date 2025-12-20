@@ -14,11 +14,11 @@ class PatternEvent:
 
 @onready var main_node = get_node("/root/MainNode")
 @onready var player = main_node.get_node("Player")
-@onready var one_bullet = ResourceLoader.load("res://Entities/Bullets/e_basic_bullet.tscn", "PackedScene")
-@onready var arc = ResourceLoader.load("res://Patterns/arc.tscn", "PackedScene")
-@onready var utsuho_fuck_you = ResourceLoader.load("res://Patterns/utsuho_fuck_you.tscn", "PackedScene")
-@onready var spread_shots = ResourceLoader.load("res://Patterns/spread_shots.tscn", "PackedScene")
-@onready var one_bullet_homing = ResourceLoader.load("res://Patterns/one_bullet_homing.tscn", "PackedScene")
+@onready var one_bullet = preload("res://Entities/Bullets/e_basic_bullet.tscn")
+@onready var arc = preload("res://Patterns/arc.tscn")
+@onready var utsuho_fuck_you = preload("res://Patterns/utsuho_fuck_you.tscn")
+@onready var spread_shots = preload("res://Patterns/spread_shots.tscn")
+@onready var one_bullet_homing = preload("res://Patterns/one_bullet_homing.tscn")
 
 func shoot_one_bullet(entity: Node2D):
 	var copy = BulletPool.get_bullet() as Bullet
@@ -28,13 +28,25 @@ func shoot_one_bullet(entity: Node2D):
 	copy.position = bullet_offset
 	main_node.add_child(copy)
 
+func shoot_directional_bullet(entity: Node2D):
+	var copy = BulletPool.get_bullet() as Bullet
+
+	var to_target = player.global_position - entity.global_position
+	var target_angle = to_target.rotated(PI / 2).angle()
+
+	copy.prepare(target_angle)
+	copy.change_speed(200)
+	var bullet_offset = entity.global_position
+	
+	bullet_offset += Vector2(0, -30).rotated(target_angle)
+	copy.position = bullet_offset
+	main_node.add_child(copy)
 
 func shoot_arc(entity: Node2D):
 	var arc_scene = arc.instantiate()
 	arc_scene.entity = entity
 	arc_scene.one_bullet = one_bullet
 	main_node.add_child(arc_scene)
-
 
 func shoot_utsuho_fuck_you(entity: Node2D):
 	var utsuho_fuck_you_scene = utsuho_fuck_you.instantiate()

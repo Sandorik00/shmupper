@@ -31,8 +31,8 @@ class StageEvent:
 
 
 var events: Array[StageEvent] = [
-	StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, false, 3),
-	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0.2, false, 3),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "RightSlideAndLeave", 0, false, 8),
+	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 0, true, 8),
 	StageEvent.new(ENEMY_TYPES.ZOOLANDER, "LeftSlideAndLeave", 0, true, 5),
 	# StageEvent.new(ENEMY_TYPES.ZOOLANDER, "RightSlideAndLeave", 1, true, 5),
 	StageEvent.new(ENEMY_TYPES.FAIRY, "LeftSlideAndLeave", 1, true, 3),
@@ -67,7 +67,7 @@ func _loop():
 		if (event.persistence == PERSISTENCE_TYPES.BOSS):
 			await enemy.tree_exited
 
-		await create_tween().tween_interval(event.pause).finished
+		# await create_tween().tween_interval(event.pause).finished
 
 func enemy_setup(event: StageEvent):
 	var enemy_and_follow = create_enemy_and_follow(event.enemy_type, event.path_name)

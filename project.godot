@@ -34,6 +34,11 @@ window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
+[editor]
+
+movie_writer/video_quality=0.9
+movie_writer/movie_file="Z:/GodotProjects/Shmup/movie.avi"
+
 [gui]
 
 theme/custom="uid://ijtcbhcbvpww"
