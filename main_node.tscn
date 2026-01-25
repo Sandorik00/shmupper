@@ -1,7 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://dy3u08iwi2g08"]
 
 [ext_resource type="Script" uid="uid://dlc22lmnwlxy" path="res://GlobalStage/StageNode.gd" id="1_220qp"]
-[ext_resource type="Shader" uid="uid://dd6qku06jx3n3" path="res://bg.gdshader" id="4_cfitj"]
 [ext_resource type="Script" uid="uid://bawmqqk4au0sj" path="res://Entities/Actors/Player/Player.gd" id="4_k84cc"]
 [ext_resource type="Script" uid="uid://effwoefajqu1" path="res://GlobalStage/bigger.gd" id="7_8jo16"]
 [ext_resource type="Script" uid="uid://cmldc78oktoag" path="res://Entities/Actors/Player/visual_hurtbox.gd" id="8_dabxs"]
@@ -9,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b57a55g3ocvpo" path="res://GlobalStage/smaller.gd" id="8_kbml8"]
 [ext_resource type="Texture2D" uid="uid://b4qedcchdiitt" path="res://Assets/Sprites/player/player-marisa.png" id="9_bc5hy"]
 [ext_resource type="Script" uid="uid://r3eqieitewty" path="res://GlobalStage/fps_counter.gd" id="10_07t30"]
+[ext_resource type="Shader" uid="uid://dd6qku06jx3n3" path="res://bg.gdshader" id="10_iw4ti"]
 [ext_resource type="FontFile" uid="uid://d0eqnur73j3pp" path="res://Fonts/quinquefive/QuinqueFive.ttf" id="12_dabxs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_07t30"]
@@ -101,31 +101,31 @@ font_size = 10
 
 [sub_resource type="Curve2D" id="Curve2D_chdxj"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -250, -50, 800, -50, -1200, 200, -500, 200)
+"points": PackedVector2Array(0, 0, 0, 0, -400, -40, 440, -150, -437.84958, 154.90572, -400, 300)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ke6mh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 250, -50, -800, -50, 0, 0, 500, 200)
+"points": PackedVector2Array(0, 0, 0, 0, 400, -40, -440, -150, 0, 0, 400, 300)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_nmw0x"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 250)
 }
 point_count = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bc5hy"]
-shader = ExtResource("4_cfitj")
-shader_parameter/density = 180.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmw0x"]
+shader = ExtResource("10_iw4ti")
+shader_parameter/density = 150.0
 shader_parameter/layer_parascale = 2
-shader_parameter/speedx = 1.49012e-07
-shader_parameter/speedy = 0.1
+shader_parameter/speedx = 0.2
+shader_parameter/speedy = 0.0
 shader_parameter/star_horizontal_wave = 0.3
 shader_parameter/star_size = 3.0
-shader_parameter/twinkle_effect = 0.60000000894072
+shader_parameter/twinkle_effect = 0.6
 shader_parameter/twinkle_speed = 0.3
 shader_parameter/fbm_strength = 0.12
 shader_parameter/fbm_mix = 0.07
@@ -143,15 +143,14 @@ shader_parameter/cloud_color_shiftx = 0.0
 shader_parameter/cloud_color_shifty = 0.0
 shader_parameter/background_color = Color(0.02, 0.04, 0.12, 1)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_cfitj"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_07t30"]
 
 [node name="MainNode" type="Node2D" node_paths=PackedStringArray("pathsCollection")]
 script = ExtResource("1_220qp")
 pathsCollection = NodePath("PathsCollection")
 
 [node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("HUD")]
-position = Vector2(231, 408)
-scale = Vector2(0.75, 0.75)
+position = Vector2(338, 568)
 collision_layer = 4
 script = ExtResource("4_k84cc")
 speed = 400
@@ -194,8 +193,8 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -220.0
-offset_bottom = 480.0
+offset_left = -330.0
+offset_bottom = 720.0
 grow_horizontal = 0
 color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
@@ -252,7 +251,7 @@ z_index = 10
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 16.0
+offset_bottom = 24.0
 grow_horizontal = 2
 color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
@@ -260,8 +259,8 @@ color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="ColorRect" type="ColorRect" parent="HUD/PanelLeft"]
 layout_mode = 0
-offset_right = 30.0
-offset_bottom = 480.0
+offset_right = 45.0
+offset_bottom = 720.0
 color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="PanelBottom" type="Panel" parent="HUD"]
@@ -279,21 +278,37 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -16.0
+offset_top = -24.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.00392157, 0.360784, 0.54902, 0.752941)
 
 [node name="PathsCollection" type="Node2D" parent="."]
-position = Vector2(225, 0)
+position = Vector2(337.5, 0)
 
-[node name="LeftSlideAndLeave" type="Path2D" parent="PathsCollection"]
+[node name="LeftSlideA" type="Path2D" parent="PathsCollection"]
 curve = SubResource("Curve2D_chdxj")
 
-[node name="RightSlideAndLeave" type="Path2D" parent="PathsCollection"]
+[node name="LeftSlideA2" type="Path2D" parent="PathsCollection"]
+position = Vector2(40, -40)
+curve = SubResource("Curve2D_chdxj")
+
+[node name="LeftSlideA3" type="Path2D" parent="PathsCollection"]
+position = Vector2(-40, 40)
+curve = SubResource("Curve2D_chdxj")
+
+[node name="RightSlideA" type="Path2D" parent="PathsCollection"]
 curve = SubResource("Curve2D_ke6mh")
 
-[node name="StraightAndWhite" type="Path2D" parent="PathsCollection"]
+[node name="RightSlideA2" type="Path2D" parent="PathsCollection"]
+position = Vector2(-40, -40)
+curve = SubResource("Curve2D_ke6mh")
+
+[node name="RightSlideA3" type="Path2D" parent="PathsCollection"]
+position = Vector2(40, 40)
+curve = SubResource("Curve2D_ke6mh")
+
+[node name="Straight" type="Path2D" parent="PathsCollection"]
 curve = SubResource("Curve2D_nmw0x")
 
 [node name="DeathScreen" type="CanvasLayer" parent="."]
@@ -346,12 +361,12 @@ wait_time = 3.0
 autostart = true
 ignore_time_scale = true
 
-[node name="BG" type="Sprite2D" parent="."]
-z_index = -505
-material = SubResource("ShaderMaterial_bc5hy")
-position = Vector2(320, 239.75)
-scale = Vector2(640, 480.5)
-texture = SubResource("CanvasTexture_cfitj")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_nmw0x")
+position = Vector2(479.75, 359.75)
+scale = Vector2(960.5, 720.50006)
+texture = SubResource("CanvasTexture_07t30")
 
 [connection signal="button_up" from="HUD/Button" to="HUD/Button" method="_on_button_up"]
 [connection signal="button_up" from="HUD/Button2" to="HUD/Button2" method="_on_button_up"]

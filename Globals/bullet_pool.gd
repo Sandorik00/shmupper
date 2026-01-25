@@ -22,12 +22,19 @@ func get_bullet(is_player: bool = false) -> Bullet:
 	else: return get_or_create_bullet(e_bullet_pool, one_bullet)
 
 func free_bullet(bullet: Bullet, is_player: bool = false):
-	bullet.get_parent().call_deferred("remove_child", bullet)
+	if bullet.removing: return
+	bullet.removing = true
+	
+	var parent = bullet.get_parent()
+	call_deferred("deffered_free", parent, bullet, is_player)
+
+func deffered_free(parent: Node2D, bullet: Bullet, is_player: bool = false):
+	parent.remove_child(bullet)
 	bullet.reset()
+	bullet.removing = false
 
 	if is_player: p_bullet_pool.push_back(bullet)
 	else: e_bullet_pool.push_back(bullet)
-
 
 # Utils
 func get_or_create_bullet(pool: Array[Bullet], bullet_scene: PackedScene) -> Bullet:

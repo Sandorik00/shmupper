@@ -11,7 +11,11 @@ func _process(_delta: float):
 		hiding = true
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "modulate:a", 0, 1).set_trans(Tween.TRANS_LINEAR)
-		tween.tween_callback(queue_free)
+		tween.tween_callback(path.queue_free)
+
+func _physics_process(_delta: float) -> void:
+	if path:
+		path.progress_ratio += 0.004
 
 func take_damage(amount: int):
 	health -= amount

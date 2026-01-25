@@ -5,6 +5,7 @@ var initial_pos: Vector2
 var additional_speed: int = 600
 var player: Node2D
 var homing_strength: float = 1
+var removing: bool = false
 
 func _ready() -> void:
 	initial_pos = position
